@@ -179,6 +179,12 @@ def _recalculate_prices(
             except TaxEmptyData as e:
                 order.tax_error = str(e)
         else:
+            apply_order_discounts(
+                order,
+                lines,
+                assign_prices=True,
+                database_connection_name=database_connection_name,
+            )
             _remove_tax(order, lines)
 
 
